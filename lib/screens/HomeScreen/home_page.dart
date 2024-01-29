@@ -9,6 +9,8 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../utils/colors.dart';
 import '../NoticeScreen/notice_screen.dart';
 import '../ProfileScreen/profile_screen.dart';
+import '../ResultScreen/result_screen.dart';
+import '../SpeechToTextScreen/speech_to_text.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -286,14 +288,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       DashboardItem(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => ResultScreen(
-                          //           userType: userController
-                          //               .userData()
-                          //               .userType,
-                          //         )));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ResultScreen()));
                         },
                         title: "Result",
                         subTitle: "Here you can see all your results",
@@ -326,10 +324,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       DashboardItem(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => const SpeechToTextScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SpeechToTextScreen()));
                         },
                         title: "Speech to Text",
                         subTitle: "Here you can translate your speech to text",
