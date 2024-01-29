@@ -5,10 +5,11 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:internet_file/internet_file.dart';
 import 'package:pdfx/pdfx.dart';
 
+import '../../Controller/notice_controller.dart';
 import '../../Controller/user_controller.dart';
 import '../../Model/notice_model.dart';
 import '../../utils/colors.dart';
-
+import 'notice_apis/notice_apis.dart';
 
 class NoticeViewScreen extends StatefulWidget {
   final NoticeModel noticeModel;
@@ -22,6 +23,8 @@ class NoticeViewScreen extends StatefulWidget {
 
 class _NoticeViewScreenState extends State<NoticeViewScreen> {
   final UserController userController = Get.find();
+  final NoticeController noticeController = Get.find();
+  NoticeApis noticeApis = Get.put(NoticeApis());
   bool _isLoading = false;
   late PdfController pdfController;
   late PageController pageController;
@@ -35,7 +38,9 @@ class _NoticeViewScreenState extends State<NoticeViewScreen> {
 
     try {
       final pdfData = await InternetFile.get(widget.noticeModel.noticeUrl);
-      pdfController = PdfController(document: PdfDocument.openData(pdfData),);
+      pdfController = PdfController(
+        document: PdfDocument.openData(pdfData),
+      );
       totalPages = (await pdfController.pagesCount)!;
       print("Anuragd $totalPages");
     } catch (e) {
@@ -58,115 +63,62 @@ class _NoticeViewScreenState extends State<NoticeViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorPrimary,
-        elevation: 0,
-        iconTheme: IconThemeData(color: colorBlack),
-        title: Text(
-          "${widget.noticeModel.noticeTitle}\n${widget.noticeModel.noticeNo}",
-          style: TextStyle(
-              fontSize: 12, fontWeight: FontWeight.bold, color: colorBlack),
+        appBar: AppBar(
+          backgroundColor: colorPrimary,
+          elevation: 0,
+          iconTheme: IconThemeData(color: colorBlack),
+          title: Text(
+            "${widget.noticeModel.noticeTitle}\n${widget.noticeModel.noticeNo}",
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, color: colorBlack),
+          ),
+          centerTitle: true,
+          actions: [
+            // Text(
+            //   "Page ${_currentPage + 1} of $totalPages",
+            //   style: TextStyle(
+            //       fontSize: 12, fontWeight: FontWeight.bold, color: colorBlack),
+            // ),
+          ],
         ),
-        centerTitle: true,
-        actions: [
-          // Text(
-          //   "Page ${_currentPage + 1} of $totalPages",
-          //   style: TextStyle(
-          //       fontSize: 12, fontWeight: FontWeight.bold, color: colorBlack),
-          // ),
-        ],
-      ),
-      body: Center(
-        child: _isLoading
-            ? CircularProgressIndicator(
-                strokeWidth: 2,
-                color: colorPrimary,
-              )
-            : PdfView(
-          controller: pdfController,
-          scrollDirection: Axis.vertical,
-          physics: BouncingScrollPhysics(),
-          onPageChanged: (page) {
-            setState(() {
-              _currentPage = page;
-            });
-          },
+        body: Center(
+          child: _isLoading
+              ? CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: colorPrimary,
+                )
+              : PdfView(
+                  controller: pdfController,
+                  scrollDirection: Axis.vertical,
+                  physics: BouncingScrollPhysics(),
+                  onPageChanged: (page) {
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                ),
         ),
-      ),
-      // floatingActionButton: SpeedDial(
-      //   direction: SpeedDialDirection.up,
-      //   icon: Icons.add,
-      //   //icon on Floating action button
-      //   activeIcon: Icons.close,
-      //   //icon when menu is expanded on button
-      //   backgroundColor: colorPrimary,
-      //   //background color of button
-      //   foregroundColor: colorWhite,
-      //   //font color, icon color in button
-      //   activeBackgroundColor: colorPrimary,
-      //   //background color when menu is expanded
-      //   activeForegroundColor: colorWhite,
-      //   visible: true,
-      //   closeManually: false,
-      //   curve: Curves.bounceIn,
-      //   overlayColor: colorBlack,
-      //   overlayOpacity: 0.1,
-      //   elevation: 12.0,
-      //   //shadow elevation of button
-      //   shape: CircleBorder(),
-      //   //shape of button
-      //
-      //   children: [
-      //     userController.userData().userType == "teacher"
-      //         ? SpeedDialChild(
-      //             //speed dial child
-      //             child: Icon(Icons.edit_outlined),
-      //             backgroundColor: colorPrimary,
-      //             foregroundColor: colorWhite,
-      //             onTap: () {
-      //               showSnackBar("Teacher", context);
-      //             },
-      //           )
-      //         : userController.userData().userType == "admin"
-      //             ? SpeedDialChild(
-      //                 //speed dial child
-      //                 child: Icon(Icons.edit_outlined),
-      //                 backgroundColor: colorPrimary,
-      //                 foregroundColor: colorWhite,
-      //                 onTap: () {
-      //                   showSnackBar("Teacher", context);
-      //                 },
-      //               )
-      //             : SpeedDialChild(),
-      //
-      //     userController.userData().userType == "teacher"
-      //         ? SpeedDialChild(
-      //             //speed dial child
-      //             child: Icon(Icons.delete_outline),
-      //             backgroundColor: colorPrimary,
-      //             foregroundColor: colorWhite,
-      //             onTap: () {},
-      //           )
-      //         : userController.userData().userType == "admin"
-      //             ? SpeedDialChild(
-      //                 //speed dial child
-      //                 child: Icon(Icons.delete_outline),
-      //                 backgroundColor: colorPrimary,
-      //                 foregroundColor: colorWhite,
-      //                 onTap: () {},
-      //               )
-      //             : SpeedDialChild(),
-      //
-      //     SpeedDialChild(
-      //       child: Icon(Icons.download_outlined),
-      //       backgroundColor: colorPrimary,
-      //       foregroundColor: colorWhite,
-      //       onTap: () {},
-      //     ),
-      //
-      //     //add more menu item children here
-      //   ],
-      // ),
-    );
+        floatingActionButton: Obx(() {
+          return FloatingActionButton(
+              backgroundColor: colorPrimary,
+              foregroundColor: colorPrimary,
+              elevation: 0,
+              shape: StadiumBorder(),
+              onPressed: () async {
+                final message = await noticeApis.deleteNotice(widget.noticeModel.noticeId);
+                print(message.toString());
+                await noticeController.fetchNotices();
+                Navigator.pop(context);
+              },
+              child: noticeApis.isLoading.value
+                  ? CircularProgressIndicator(
+                      color: colorBlack,
+                      strokeWidth: 2,
+                    )
+                  : Icon(
+                      Icons.delete,
+                      color: colorWhite,
+                    ));
+        }));
   }
 }

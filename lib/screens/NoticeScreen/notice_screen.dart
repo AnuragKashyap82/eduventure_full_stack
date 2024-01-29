@@ -1,4 +1,6 @@
+import 'package:eduventure_nodejs/screens/NoticeScreen/add_notice_screen.dart';
 import 'package:eduventure_nodejs/screens/NoticeScreen/widgets/notice_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -18,7 +20,7 @@ class NoticeScreen extends StatefulWidget {
 }
 
 class _NoticeScreenState extends State<NoticeScreen> {
-  final noticeController = Get.put(NoticeController());
+  final NoticeController noticeController = Get.find();
   final UserController userController = Get.find();
 
   @override
@@ -33,12 +35,38 @@ class _NoticeScreenState extends State<NoticeScreen> {
           style: TextStyle(
               fontSize: 16, color: colorBlack, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          if (userController.userData().userType == "teacher")
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (_) => AddNoticeScreen()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Icon(Icons.edit_note_sharp, color: colorBlack),
+              ),
+            )
+          else if (userController.userData().userType == "admin")
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (_) => AddNoticeScreen()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Icon(Icons.edit_note_sharp, color: colorBlack),
+              ),
+            )
+          else
+            SizedBox(), // User is neither teacher nor admin
+        ],
       ),
-      body:
-      Obx(() {
+      body: Obx(() {
         if (noticeController.isLoading.value)
-          return  Center(
-            child: CircularProgressIndicator(strokeWidth: 2, color: colorPrimary),
+          return Center(
+            child:
+                CircularProgressIndicator(strokeWidth: 2, color: colorPrimary),
           );
         if (noticeController.allNotices.isEmpty) {
           return Center(
@@ -75,29 +103,6 @@ class _NoticeScreenState extends State<NoticeScreen> {
           },
         );
       }),
-      floatingActionButton: userController.userData().userType == "teacher"
-          ? FloatingActionButton(
-              backgroundColor: colorPrimary,
-              shape: StadiumBorder(),
-              onPressed: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => AddNoticeScreen()));
-              },
-              child: Icon(Icons.add, color: colorBlack,),
-            )
-          : userController.userData().userType == "admin"
-              ? FloatingActionButton(
-        backgroundColor: colorPrimary,
-        shape: StadiumBorder(),
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => AddNoticeScreen()));
-                  },
-                  child: Icon(Icons.add, color: colorBlack,),
-                )
-              : SizedBox(),
     );
   }
 }
