@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:eduventure_nodejs/apis/apis.dart';
 import 'package:get/get.dart';
 
+import '../../../Controller/time_table_controller.dart';
+import '../../../Controller/time_table_faculty_controller.dart';
 import '../../../Controller/user_controller.dart';
 
 class ProfileApis extends GetxController{
@@ -13,8 +15,8 @@ class ProfileApis extends GetxController{
   Future<void> clearControllers() async {
     Get.delete<UserController>();
     // Get.delete<ClassroomController>();
-    // Get.delete<FacultyTimeTableControllerController>();
-    // Get.delete<TimeTableController>();
+    Get.delete<FacultyTimeTableControllerController>();
+    Get.delete<TimeTableController>();
   }
 
   Future<String> updateProfile(

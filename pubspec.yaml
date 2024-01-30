@@ -51,6 +51,7 @@ dependencies:
   internet_file: ^1.2.0
   firebase_core: ^2.24.2
   firebase_storage: ^11.6.0
+  flutter_speed_dial: ^6.2.0
 
 dev_dependencies:
   flutter_test:

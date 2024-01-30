@@ -62,7 +62,8 @@ class _NoticeScreenState extends State<NoticeScreen> {
             SizedBox(), // User is neither teacher nor admin
         ],
       ),
-      body: Obx(() {
+      body:
+      Obx(() {
         if (noticeController.isLoading.value)
           return Center(
             child:

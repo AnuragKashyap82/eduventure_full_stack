@@ -7,10 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../utils/colors.dart';
+import '../AddStudentIdScreen/add_student_id_screen.dart';
+import '../LibraryScreen/library_screen.dart';
+import '../MaterialScreen/material_screen.dart';
 import '../NoticeScreen/notice_screen.dart';
 import '../ProfileScreen/profile_screen.dart';
 import '../ResultScreen/result_screen.dart';
 import '../SpeechToTextScreen/speech_to_text.dart';
+import '../TimeTableScreens/time_table_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -189,14 +193,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       DashboardItem(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => LibraryScreen(
-                          //           userType: userController
-                          //               .userData()
-                          //               .userType,
-                          //         )));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LibraryScreen(
+
+                                  )));
                         },
                         title: "Library",
                         subTitle: "Here all books are available for issue or reading",
@@ -228,11 +230,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ?
                   DashboardItem(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //         const AddStudentIdScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const AddStudentIdScreen()));
                     },
                     title: "Add Student Id",
                     subTitle: "Add student id of newly admitted students",
@@ -250,12 +252,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                       DashboardItem(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //         const TimeTableScreen()));
-                          // showSnackBar("Under Development", context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const TimeTableScreen()));
                         },
                         title: "Update Time Table",
                         subTitle: "Add Time Table for the All Branch and year",
@@ -304,14 +305,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       DashboardItem(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => MaterialsScreen(
-                          //           userType: userController
-                          //               .userData()
-                          //               .userType,
-                          //         )));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MaterialsScreen(
+                                    userType: userController
+                                        .userData()
+                                        .userType,
+                                  )));
                         },
                         title: "Materials",
                         subTitle: "All materials are available here",

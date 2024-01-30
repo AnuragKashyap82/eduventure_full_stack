@@ -74,8 +74,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         TextEditingController(text: userController.userData().seatType);
 
     ///Photo to be update or stored in Firebase Storage
-    void uploadPhoto() async {
-      photoUrl = await Storage().uploadImageToStorage(_image!);
+    Future<void> uploadPhoto() async {
+      photoUrl = await storageApis.uploadImageToStorage(_image!);
       String message = await profileApis.updateProfile(
           _name.text.trim(),
           _completeAddress.text.trim(),
