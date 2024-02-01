@@ -200,13 +200,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
         overlayColor: colorBlack,
         overlayOpacity: 0,
         elevation: 0.0,
-        shape: StadiumBorder(),
+        shape: CircleBorder(),
         children: [
           SpeedDialChild(
             child: Icon(Icons.edit_outlined),
             backgroundColor: colorPrimary,
             foregroundColor: colorWhite,
-            shape: StadiumBorder(),
+            shape: CircleBorder(),
             onTap: () {
               Navigator.push(
                   context,
@@ -218,7 +218,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             child: Icon(Icons.add_outlined),
             backgroundColor: colorPrimary,
             foregroundColor: colorWhite,
-            shape: StadiumBorder(),
+            shape: CircleBorder(),
             onTap: () {
               Navigator.push(
                   context,

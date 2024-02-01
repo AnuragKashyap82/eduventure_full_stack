@@ -1,6 +1,5 @@
 import 'package:eduventure_nodejs/screens/LoginScreen/login_screen.dart';
 import 'package:eduventure_nodejs/screens/HomeScreen/home_page.dart';
-import 'package:eduventure_nodejs/screens/splash_screen.dart';
 import 'package:eduventure_nodejs/utils/colors.dart';
 import 'package:eduventure_nodejs/utils/custom_scrool_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,17 +20,17 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  /// This widget is the root of your application.
   Future<Widget> checkLogin(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token') ?? ''; // Set default value as empty string
-
     if (token.isNotEmpty) {
       return HomeScreen();
     } else {
       return LoginScreen();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

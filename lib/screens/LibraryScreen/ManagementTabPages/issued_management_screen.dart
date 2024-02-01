@@ -4,7 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../Controller/issue_book_controller.dart';
 import '../../../utils/colors.dart';
-import '../../user_all_issued_book_screen.dart';
+import '../user_all_issued_book_screen.dart';
 import '../Widgets/user_applied_card.dart';
 
 class IssuedManagementScreen extends StatefulWidget {

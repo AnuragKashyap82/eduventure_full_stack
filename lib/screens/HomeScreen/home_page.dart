@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../utils/colors.dart';
 import '../AddStudentIdScreen/add_student_id_screen.dart';
+import '../ClassroomScreen/classroom_screen.dart';
 import '../LibraryScreen/library_screen.dart';
 import '../MaterialScreen/material_screen.dart';
 import '../NoticeScreen/notice_screen.dart';
@@ -173,14 +174,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       DashboardItem(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => ClassroomScreen(
-                          //           userType: userController
-                          //               .userData()
-                          //               .userType,
-                          //         )));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ClassroomScreen()));
                         },
                         title: "Classroom",
                         subTitle: "You can create or join class",

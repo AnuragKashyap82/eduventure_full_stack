@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../Controller/issue_book_controller.dart';
-import '../Model/issue_book_model.dart';
-import '../utils/colors.dart';
-import '../utils/global_variables.dart';
-import 'LibraryScreen/library_apis/library_apis.dart';
+import '../../Controller/issue_book_controller.dart';
+import '../../Model/issue_book_model.dart';
+import '../../utils/colors.dart';
+import '../../utils/global_variables.dart';
+import 'library_apis/library_apis.dart';
 
 class UserAllIssuedBooksScreen extends StatefulWidget {
   final IssueBookModel issueBookModel;
